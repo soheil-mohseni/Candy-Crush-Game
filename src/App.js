@@ -34,8 +34,7 @@ function App() {
   const dragEnd = (e)=>{
     const candyDragedId = parseInt(candyDrag.getAttribute('data-id'))
     const candyDropId = parseInt(candyDrop.getAttribute('data-id'))
-    candyList[candyDragedId] = candyDrop.style.backgroundColor
-    candyList[candyDropId] = candyDrag.style.backgroundColor
+
 
     const validMoves = [
       candyDragedId - 1 , 
@@ -43,9 +42,11 @@ function App() {
       candyDragedId + width,
       candyDragedId - width,
     ]
-    const isvalid = validMoves.includes(candyDragedId)
-    console.log("lllllllllllll", isvalid);
+    const isvalid = validMoves.includes(candyDropId)
+    console.log("lllllllllllll", isvalid, candyDrag.getAttribute('data-id'), validMoves);
     if (candyDropId && isvalid ) {
+      candyList[candyDragedId] = candyDrop.style.backgroundColor
+      candyList[candyDropId] = candyDrag.style.backgroundColor
       const first = checkForFourColumn();
       const second = checkForFourRow();
       const third = checkForThreeColumn();
@@ -54,11 +55,8 @@ function App() {
         setCandyDrag(null)
         setCandyDrop(null)
       }
-    }else{
-      // candyList[candyDragedId] = candyDrop.style.backgroundColor
-      // candyList[candyDropId] = candyDrag.style.backgroundColor
-      candyList[candyDragedId] = candyDrag.style.backgroundColor
-      candyList[candyDropId] = candyDrop.style.backgroundColor
+    }
+    else{
       setCandyList([...candyList]);
     }
   }
